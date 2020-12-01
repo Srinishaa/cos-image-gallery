@@ -5,6 +5,7 @@ declared-services:
     plan: lite
 applications:
 - path: .
+  memory: 100M
   instances: 1
   domain: eu-gb.mybluemix.net
   name: cos-web-gallery
