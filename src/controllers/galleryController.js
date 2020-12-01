@@ -17,9 +17,9 @@ var galleryController = function(title) {
     var aws = require('ibm-cos-sdk');
     var multer = require('multer');
     var multerS3 = require('multer-s3');
-    var ep = new aws.Endpoint('https://s3.us-south.cloud-object-storage.appdomain.cloud');
-    var s3 = new aws.S3({endpoint: ep, region: 'us-south'});
-    var myBucket = 'web-images-olaph';
+    var ep = new aws.Endpoint("s3.jp-tok.cloud-object-storage.appdomain.cloud");
+    var s3 = new aws.S3({endpoint: ep, region: 'jp-tok'});
+    var myBucket = 'test-bucket2306';
 
     var upload = multer({
         storage: multerS3({
@@ -41,14 +41,14 @@ var galleryController = function(title) {
                 var bucketContents = data.Contents;
 
                 for (var i = 0; i < bucketContents.length; i++) {
-                    if(bucketContents[i].Key.search(/.jpg/i) > -1) {
+                    if(bucketContents[i].Key.search(/.png/i) > -1 | bucketContents[i].Key.search(/.jpg/i) > -1) {
                         var urlParams = {Bucket: myBucket, Key: bucketContents[i].Key};
-
                         s3.getSignedUrl('getObject', urlParams, function (err, url) {
-                            imageUrlList[i] = url;
+                            imageUrlList.push(url);
                         });
                     }
                 }
+                console.log(imageUrlList)
             }
             res.render('galleryView', {
                 title: title,

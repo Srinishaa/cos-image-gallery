@@ -7,9 +7,7 @@ applications:
 - path: .
   memory: 256M
   instances: 1
-  domain: mybluemix.net
+  domain: eu-gb.mybluemix.net
   name: cos-web-gallery
-  host: cos-web-gallery
+  host: cos-web-gallery2306
   disk_quota: 1024M
-  services:
-  - cwg-cloud-object-storage
